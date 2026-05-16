@@ -26,22 +26,19 @@ int Train::getLength() {
 
   while (true) {
     ++step;
-    // идём на step вагонов вперёд
     Car* cur = first;
     for (int i = 0; i < step; ++i) {
       cur = cur->next;
       ++countOp;
     }
-    // если свет совпадает с начальным
     if (cur->light == startLight) {
-      cur->light = !cur->light;         // переключаем
-      if (cur != first) {               // возвращаемся назад, если не первый
+      cur->light = !cur->light;
+      if (cur != first) {
         for (int i = 0; i < step; ++i) {
           cur = cur->prev;
           ++countOp;
         }
       }
-      // если свет в первом вагоне изменился – длина найдена
       if (first->light != startLight) {
         return step;
       }
